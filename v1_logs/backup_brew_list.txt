@@ -1,0 +1,12 @@
+boost
+cloc
+ctags
+libevent
+makedepend
+openssl
+pkg-config
+python3
+readline
+sqlite
+tmux
+xz
