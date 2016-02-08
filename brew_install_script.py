@@ -27,8 +27,9 @@ def backup_brew_list(file_name):
 
 def install_pkg(file_name):
     f_pkg_list = open(file_name+'.txt','r')
-    f_log = open(file_name+'.log','w')
+    f_log = open(file_name+'_error.log','w')
     pkg_list = f_pkg_list.readlines()
+    #pkg_list = ['allpaths-lg','amos','analysis','arpack','arrayfire', 'astronomy-net','atpdec','atram','bali-phy','bamtools','bcftools','beagle','bioformats-cpp','biopieces','blasr','blast','blat','    bless','cegma','circlator','circos','clustal-w','colpack','corset','cvblob']
     count = 1
     for pkg in pkg_list:
         if count <= 100:
@@ -40,12 +41,7 @@ def install_pkg(file_name):
                 response,_ = p.communicate(input=None, timeout=300)
                 response = response.decode('utf8')
                 f_log.write('installing '+pkg)
-                response  = response.split('\n')
-                for response_line in response:
-                    if 'error' in response_line or 'fail' in response_line:
-                        f_log.write(response_line+'\n')
-                f_log.write(response[len(response)-2]+'\n')
-                #p.kill()
+                f_log.write(response+'\n')
                 count = count + 1
             except (Exception) as e:
                 p.kill()
